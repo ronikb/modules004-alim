@@ -1,28 +1,41 @@
 # This will do application specific settings
 
-class app::gitclone_db {        
-	exec { "gitclone-db":
-		command => "git clone $application_drupal_gitclone_db $application_drupal_gitclone_db_destination",
-		timeout => 3600, 
-       logoutput=> on_failure, 
-		before => Class ["app::dbcreate"]
-}
-}
+#class app::gitclone_db {        
+#	exec { "gitclone-db":
+#		command => "git clone $application_drupal_gitclone_db $application_drupal_gitclone_db_destination",
+#		timeout => 3600, 
+#       logoutput=> on_failure, 
+#		before => Class ["app::dbcreate"]
+#}
+#}
 class app::gitclone_app {
 	exec { "gitclone-application":
 		command => "git clone $application_drupal_gitclone_application $application_drupal_gitclone_application_destination",
-		require => Class ["app::gitclone_db"]
+#		require => Class ["app::gitclone_db"]
+}
+}
+class app::mysql_config {
+	exec { "edit_max_allowed_packet":
+		command => "sed -i 's/max_allowed_packet = .*/max_allowed_packet = $app_mysql_max_allowed_packet/' /etc/mysql/my.cnf",
+		require => Service["mysql"]
+}
+}
+class app::mysql_restart {
+	exec { "mysql_service_restart":
+		command => "service mysql restart"
+		require => Class ["app::mysql_config"]
 }
 }
 class app::dbcreate {
 	exec { "db-create":
 		command =>"/etc/puppet/modules/application/scripts/mysql-db-create.sh $application_mysql_dbname",
-		require => Service["mysql"]
+		require => Class ["app::mysql_restart"]
 }
 }
 class app::dbrestore {
 	exec { "db-restore":
 		command =>"/etc/puppet/modules/application/scripts/mysql-db-restore.sh $application_mysql_dbname $application_mysql_dump_location_for_dbrestore",
+		timeout => 3600
 		require => Class ["app::dbcreate"],
 }
 }
@@ -52,6 +65,6 @@ class app::edit_for_documentroot{
 }
 
 class app {
-	include app::gitclone_db, app::gitclone_app, app::dbcreate, app::dbrestore, app::php_memory, app::symlink, app::edit_for_cleanurl, app::edit_for_documentroot
+	include app::gitclone_app, app::mysql_config, app::mysql_restart, app::dbcreate, app::dbrestore, app::php_memory, app::symlink, app::edit_for_cleanurl, app::edit_for_documentroot
 }
 
