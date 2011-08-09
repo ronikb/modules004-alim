@@ -4,7 +4,7 @@
 $application_drupal_gitclone_application="https://github.com/alim-foundation/www.alim.org.git"
 
 #The destination folder in the server to where the application fiels to be cloned
-$application_drupal_gitclone_application_destination="/var/www/"
+$application_drupal_gitclone_application_destination="/var/www/www.alim.org/"
 
 #Clone URL from where the database and files fodler of drupal to be cloned
 $application_drupal_gitclone_db="git@github.com:netspective/medigy-drupal-db.git"

@@ -36,6 +36,7 @@ class app::dbrestore {
 	exec { "db-restore":
 		command =>"/etc/puppet/modules/app/scripts/mysql-db-restore.sh $application_mysql_dbname $application_mysql_dump_location_for_dbrestore",
 		timeout => 3600,
+		logoutput=> on_failure,
 		require => Class ["app::dbcreate"]
 }
 }
