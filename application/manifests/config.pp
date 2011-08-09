@@ -1,17 +1,17 @@
 # This will do application specific settings
 
-class application::test {        
-	exec { "gitclone-db":
-		command => "git clone $application_drupal_gitclone_db $application_drupal_gitclone_db_destination",
-		timeout => 3600, 
-       logoutput=> on_failure, 
-		before => Class ["application::dbcreate"]
-}
-}
+#class application::test {        
+#	exec { "gitclone-db":
+#		command => "git clone $application_drupal_gitclone_db $application_drupal_gitclone_db_destination",
+#		timeout => 3600, 
+#       logoutput=> on_failure, 
+#		before => Class ["application::dbcreate"]
+#}
+#}
 class application::gitcloneapp {
 	exec { "gitclone-application":
 		command => "git clone $application_drupal_gitclone_application $application_drupal_gitclone_application_destination",
-		require => Class ["application::test"]
+#		require => Class ["application::test"]
 }
 }
 class application::dbcreate {
@@ -26,7 +26,7 @@ class application::dbrestore {
 		require => Class ["application::dbcreate"],
 }
 }
-class application::php {
+class application::php_memory {
 	 exec { "increase-php-memory-limit":
 			command => "sed -i 's/memory_limit = .*/memory_limit = $application_php_memory_limit/' /etc/php5/apache2/php.ini",
        	require => Package["php5"]
