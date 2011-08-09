@@ -22,7 +22,7 @@ $application_mysql_dbname="alim"
 $application_php_memory_limit="384M"
 
 #
-$app_mysql_max_allowed_packet=500M
+$app_mysql_max_allowed_packet="500M"
 
 #the default document root of apache2
 $application_apache_default_documentroot="/var/www"
