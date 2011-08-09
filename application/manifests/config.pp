@@ -8,7 +8,7 @@
 #		before => Class ["application::dbcreate"]
 #}
 #}
-class application::gitcloneapp {
+class application::config {
 	exec { "gitclone-application":
 		command => "git clone $application_drupal_gitclone_application $application_drupal_gitclone_application_destination",
 #		require => Class ["application::test"]
@@ -35,7 +35,7 @@ class application::php_memory {
 class application::symlink{
 	exec { "symlink-for-files-folder":
 		command => "ln -s $application_drupal_symlink_files_folder_source $application_drupal_symlink_files_folder_destination",
-		require => Class ["application::gitcloneapp"],
+		require => Class ["application::config"],
 }
 }
 class application::editfor_cleanurl{
