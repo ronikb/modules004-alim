@@ -21,7 +21,7 @@ $application_mysql_dbname="alim"
 #The memeory limit of the PHP
 $application_php_memory_limit="384M"
 
-#
+#The my.cnf file editing
 $app_mysql_max_allowed_packet="500M"
 
 #the default document root of apache2
@@ -34,7 +34,7 @@ $application_apache_current_documentroot="/var/www/www.alim.org/"
 $application_drupal_symlink_files_folder_source="/alim/www.alim.org/sites/default/files"
 
 #the destination symlink folder
-$application_drupal_symlink_files_folder_destination="/var/www/html/www.alim.org/sites/default/files"
+$application_drupal_symlink_files_folder_destination="/var/www/www.alim.org/sites/default/files"
 
 #necessary defaults
 Exec { 
