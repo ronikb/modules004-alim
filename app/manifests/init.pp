@@ -28,13 +28,13 @@ class app::mysql_restart {
 }
 class app::dbcreate {
 	exec { "db-create":
-		command =>"/etc/puppet/modules/application/scripts/mysql-db-create.sh $application_mysql_dbname",
+		command =>"/etc/puppet/modules/app/scripts/mysql-db-create.sh $application_mysql_dbname",
 		require => Class ["app::mysql_restart"]
 }
 }
 class app::dbrestore {
 	exec { "db-restore":
-		command =>"/etc/puppet/modules/application/scripts/mysql-db-restore.sh $application_mysql_dbname $application_mysql_dump_location_for_dbrestore",
+		command =>"/etc/puppet/modules/app/scripts/mysql-db-restore.sh $application_mysql_dbname $application_mysql_dump_location_for_dbrestore",
 		timeout => 3600
 		require => Class ["app::dbcreate"],
 }
@@ -59,7 +59,7 @@ class app::edit_for_cleanurl{
 }
 class app::edit_for_documentroot{
 	exec { "edit-documentRoot-folder-path":
-       command => "/etc/puppet/modules/application/scripts/edit-documentRoot-folder-path.sh $application_apache_default_documentroot $application_apache_current_documentroot",
+       command => "/etc/puppet/modules/app/scripts/edit-documentRoot-folder-path.sh $application_apache_default_documentroot $application_apache_current_documentroot",
       require => Package["apache2"]
 }
 }
