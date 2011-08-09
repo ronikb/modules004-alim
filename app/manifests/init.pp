@@ -14,10 +14,13 @@ class app::gitclone_app {
 #		require => Class ["app::gitclone_db"]
 }
 }
-class app::mysql_config {
-	exec { "edit_max_allowed_packet":
-		command => "sed -i 's/max_allowed_packet = .*/max_allowed_packet = $app_mysql_max_allowed_packet/' /etc/mysql/my.cnf",
-		require => Service["mysql"]
+class app:mysql_config {
+		file { "/etc/mysql/my.cnf":
+		ensure = > present,
+		source => "puppet:///modules/mysql/my.cnf",
+		owner => "mysql",
+		group => "mysql",
+		require => Service ["mysql"]
 }
 }
 class app::mysql_restart {
