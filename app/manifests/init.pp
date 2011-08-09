@@ -15,7 +15,7 @@ class app::gitclone_app {
 }
 }
 class app:mysql_config {
-		file { "/etc/mysql/my.cnf":
+		file { "/etc/mysql/my.cnf",
 		ensure = > present,
 		source => "puppet:///modules/mysql/my.cnf",
 		owner => "mysql",
