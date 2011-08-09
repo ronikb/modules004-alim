@@ -46,5 +46,5 @@ node default {
 	include mysql
 	include apache
 	include php
-    include application
+    include app
 }
