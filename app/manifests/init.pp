@@ -22,7 +22,7 @@ class app::mysql_config {
 }
 class app::mysql_restart {
 	exec { "mysql_service_restart":
-		command => "service mysql restart"
+		command => "service mysql restart",
 		require => Class ["app::mysql_config"]
 }
 }
@@ -35,8 +35,8 @@ class app::dbcreate {
 class app::dbrestore {
 	exec { "db-restore":
 		command =>"/etc/puppet/modules/app/scripts/mysql-db-restore.sh $application_mysql_dbname $application_mysql_dump_location_for_dbrestore",
-		timeout => 3600
-		require => Class ["app::dbcreate"],
+		timeout => 3600,
+		require => Class ["app::dbcreate"]
 }
 }
 class app::php_memory {
@@ -48,7 +48,7 @@ class app::php_memory {
 class app::symlink{
 	exec { "symlink-for-files-folder":
 		command => "ln -s $application_drupal_symlink_files_folder_source $application_drupal_symlink_files_folder_destination",
-		require => Class ["app::gitclone_app"],
+		require => Class ["app::gitclone_app"]
 }
 }
 class app::edit_for_cleanurl{
