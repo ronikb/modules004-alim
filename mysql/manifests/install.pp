@@ -29,12 +29,7 @@ class mysql::install {
 		source => "puppet:///modules/mysql/my.cnf",
 		owner => "mysql",
 		group => "mysql",
-		require => Service ["mysql"]
+		require => Package ["mysql-server"]
 }
-	exec { "restart mysql service": 
-         command     => "service mysql restart", 
-         refreshonly => true, 
-         require     => File[ "/etc/mysql/my.cnf"] 
-} 
 }
 
