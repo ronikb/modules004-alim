@@ -1,4 +1,4 @@
 #!/bin/sh
 #For restarting mysql service
-service mysqld restart
+service mysql restart
 echo Result: $?
