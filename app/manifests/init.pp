@@ -14,7 +14,13 @@ class app::gitclone_app {
 #		require => Class ["app::gitclone_db"]
 }
 }
-
+class app::mysql_restart {
+	exec { "restart mysql service": 
+         command     => "service mysql restart", 
+         refreshonly => true, 
+         before => Class ["app::dbrestore"]
+} 
+}
 class app::dbcreate {
 	exec { "db-create":
 		command =>"/etc/puppet/modules/app/scripts/mysql-db-create.sh $application_mysql_dbname",
@@ -55,6 +61,6 @@ class app::edit_for_documentroot{
 }
 
 class app {
-	include app::gitclone_app, app::dbcreate, app::dbrestore, app::php_memory, app::symlink, app::edit_for_cleanurl, app::edit_for_documentroot
+	include app::gitclone_app, app::mysql_restart, app::dbcreate, app::dbrestore, app::php_memory, app::symlink, app::edit_for_cleanurl, app::edit_for_documentroot
 }
 
