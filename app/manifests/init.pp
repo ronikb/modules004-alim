@@ -18,13 +18,13 @@ class app::mysql_restart {
 	exec { "restart mysql service": 
          command     => "service mysql restart", 
          refreshonly => true, 
-         before => Class ["app::dbrestore"]
+         require => Service ["mysql"]
 } 
 }
 class app::dbcreate {
 	exec { "db-create":
 		command =>"/etc/puppet/modules/app/scripts/mysql-db-create.sh $application_mysql_dbname",
-		require => Service ["mysql"]
+		require => Class  ["app::mysql_restart"]
 }
 }
 class app::dbrestore {
