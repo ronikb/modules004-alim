@@ -17,12 +17,17 @@ class mysql::install {
 	group { "mysql":
 		ensure => present,
 }
-	service { "mysql":
-		ensure => running,
-		hasstatus => true,
-		hasrestart => true,
-		require => File ["/etc/mysql/my.cnf"]
-}
+#	service { "mysql":
+#		ensure => running,
+#		hasstatus => true,
+#		hasrestart => true,
+#		require => File ["/etc/mysql/my.cnf"]
+#}
+	service { "mysql": 
+         hasrestart => true, 
+         hasstatus  => true, 
+         require => File ["/etc/mysql/my.cnf"] 
+} 
 	file { "/etc/mysql/my.cnf":
 		ensure => present,
 		source => "puppet:///modules/mysql/my.cnf",
