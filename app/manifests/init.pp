@@ -16,15 +16,14 @@ class app::gitclone_app {
 }
 class app::mysql_restart {
 	exec { "restart_mysql_service": 
-         command  => "service mysql restart", 
-         refreshonly => true, 
-         require => Service ["mysql"]
+         command  => "/etc/puppet/modules/app/scripts/mysql-service-restart.sh", 
+         before => Class ["app::dbcreate"]
 } 
 }
 class app::dbcreate {
 	exec { "db-create":
 		command =>"/etc/puppet/modules/app/scripts/mysql-db-create.sh $application_mysql_dbname",
-		require => Class ["app::mysql_restart"]
+		require => Service ["mysql"]
 }
 }
 class app::dbrestore {
