@@ -24,7 +24,7 @@ class mysql::install {
 		require => Package ["mysql-server"]
 }
 	file { "/etc/mysql/my.cnf":
-		ensure = > present,
+		ensure => present,
 		source => "puppet:///modules/mysql/my.cnf",
 		owner => "mysql",
 		group => "mysql",
