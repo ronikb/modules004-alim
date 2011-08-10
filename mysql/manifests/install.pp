@@ -21,7 +21,7 @@ class mysql::install {
 		ensure => running,
 		hasstatus => true,
 		hasrestart => true,
-		require => Package ["mysql-server"]
+		require => File ["/etc/mysql/my.cnf"]
 }
 	file { "/etc/mysql/my.cnf":
 		ensure => present,
