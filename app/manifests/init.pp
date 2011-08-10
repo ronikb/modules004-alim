@@ -14,25 +14,11 @@ class app::gitclone_app {
 #		require => Class ["app::gitclone_db"]
 }
 }
-class app:mysql_config {
-		file { "/etc/mysql/my.cnf":
-		ensure = > present,
-		source => "puppet:///modules/app/my.cnf",
-		owner => "mysql",
-		group => "mysql",
-		require => Service ["mysql"]
-}
-}
-class app::mysql_restart {
-	exec { "mysql_service_restart":
-		command => "service mysql restart",
-		require => Class ["app::mysql_config"]
-}
-}
+
 class app::dbcreate {
 	exec { "db-create":
 		command =>"/etc/puppet/modules/app/scripts/mysql-db-create.sh $application_mysql_dbname",
-		require => Class ["app::mysql_restart"]
+		require => Service ["mysql"]
 }
 }
 class app::dbrestore {
@@ -69,6 +55,6 @@ class app::edit_for_documentroot{
 }
 
 class app {
-	include app::gitclone_app, app::mysql_config, app::mysql_restart, app::dbcreate, app::dbrestore, app::php_memory, app::symlink, app::edit_for_cleanurl, app::edit_for_documentroot
+	include app::gitclone_app, app::dbcreate, app::dbrestore, app::php_memory, app::symlink, app::edit_for_cleanurl, app::edit_for_documentroot
 }
 

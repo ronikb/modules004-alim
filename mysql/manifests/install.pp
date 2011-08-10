@@ -7,20 +7,28 @@ class mysql::install {
 }
 
 	user { "mysql":
-	ensure => present,
-	comment => "MySQL user",
-	gid => "mysql",
-	shell => "/bin/false",
-	require => Group["mysql"],
+		ensure => present,
+		comment => "MySQL user",
+		gid => "mysql",
+		shell => "/bin/false",
+		require => Group["mysql"],
 }
 
 	group { "mysql":
-	ensure => present,
+		ensure => present,
 }
 	service { "mysql":
-	ensure => running,
-	hasstatus => true,
-	hasrestart => true,
-	require => Package ["mysql-server"]
+		ensure => running,
+		hasstatus => true,
+		hasrestart => true,
+		require => Package ["mysql-server"]
+}
+	file { "/etc/mysql/my.cnf":
+		ensure = > present,
+		source => "puppet:///modules/mysql/my.cnf",
+		owner => "mysql",
+		group => "mysql",
+		require => Package ["mysql-server"]
 }
 }
+
