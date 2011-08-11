@@ -58,7 +58,7 @@ class app::edit_for_documentroot{
       require => Package["apache2"]
 }
 }
-class app:: drupal_settings_file {
+class app::drupal_settings_file {
 	file { "/etc/app/settings.php":
 		ensure => present,
 		source => "puppet:///modules/app/settings.php",
