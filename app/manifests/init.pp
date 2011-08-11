@@ -74,6 +74,6 @@ class app::write_permissions_to_files_folder {
 }
 
 class app {
-	include app::gitclone_app, app::mysql_restart, app::dbcreate, app::dbrestore, app::php_memory, app::symlink, app::edit_for_cleanurl, app::edit_for_documentroot, app:: drupal_settings_file, app::write_permissions_to_files_folder
+	include app::gitclone_app, app::mysql_restart, app::dbcreate, app::dbrestore, app::php_memory, app::symlink, app::edit_for_cleanurl, app::edit_for_documentroot, app::drupal_settings_file, app::write_permissions_to_files_folder
 }
 
