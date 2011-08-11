@@ -12,8 +12,14 @@ class apache::install {
 	require => Package ["apache2"],
 }
 }
+class apache::modules {
+	exec { "mod-rewrite-on":
+		command =>"a2enmod rewrite",
+		require => Service ["apache2"]
+}
+}
 
 class apache {
-	include apache::install 
+	include apache::install, apache::modules
 }
 

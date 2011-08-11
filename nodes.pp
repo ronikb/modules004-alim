@@ -28,7 +28,7 @@ $app_apache_default_documentroot="/var/www"
 $app_apache_current_documentroot="/var/www/www.alim.org/"
 
 #files folder drupal to which the sym link to be created
-$app_drupal_symlink_files_folder_source="/alim/www.alim.org/sites/default/files"
+$app_drupal_symlink_files_folder_source="/alim/alim.org/sites/default/files"
 
 #the destination symlink folder
 $app_drupal_symlink_files_folder_destination="/var/www/www.alim.org/sites/default/files"
