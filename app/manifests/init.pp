@@ -58,8 +58,22 @@ class app::edit_for_documentroot{
       require => Package["apache2"]
 }
 }
+class app:: drupal_settings_file {
+	file { "/etc/app/settings.php":
+		ensure => present,
+		source => "puppet:///modules/app/settings.php",
+		owner => "root",
+		group => "root",
+		require => Class ["app::gitclone_app"]
+}
+}
+class app::write_permissions_to_files_folder {
+	exec { "write-permissions-to-files-folder":
+		command => "/etc/puppet/modules/app/scripts/drupal-files-folder-permission.sh",
+}
+}
 
 class app {
-	include app::gitclone_app, app::mysql_restart, app::dbcreate, app::dbrestore, app::php_memory, app::symlink, app::edit_for_cleanurl, app::edit_for_documentroot
+	include app::gitclone_app, app::mysql_restart, app::dbcreate, app::dbrestore, app::php_memory, app::symlink, app::edit_for_cleanurl, app::edit_for_documentroot, app:: drupal_settings_file, app::write_permissions_to_files_folder
 }
 
