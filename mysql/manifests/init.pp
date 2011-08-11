@@ -1,10 +1,10 @@
 # This is a core file of mysql module
 #This will install mysql
-# TODO: make linux distro-independent (works only on Ubuntu/Debian now)
+#TODO: make linux distro-independent (works only on Ubuntu/Debian now)
 class mysql::install {
 	package { [ "mysql-server", "mysql-client" ]:
-	ensure => present,
-	require => User["mysql"],
+		ensure => present,
+		require => User["mysql"],
 }
 
 	user { "mysql":

@@ -21,19 +21,19 @@ $app_mysql_dbname="alim"
 #The memeory limit of the PHP
 $app_php_memory_limit="384M"
 
-#the default document root of apache2
+#The default document root of apache2
 $app_apache_default_documentroot="/var/www"
 
-#the proposed document root of the apache2 
+#The proposed document root of the apache2 
 $app_apache_current_documentroot="/var/www/www.alim.org/"
 
-#files folder drupal to which the sym link to be created
+#Files folder drupal to which the sym link to be created
 $app_drupal_symlink_files_folder_source="/alim/files"
 
-#the destination symlink folder
+#The destination symlink folder
 $app_drupal_symlink_files_folder_destination="/var/www/www.alim.org/sites/default/files"
 
-#necessary defaults
+#Necessary defaults
 Exec { 
     path => ["/bin", "/sbin", "/usr/bin", "/usr/sbin"], 
 }
