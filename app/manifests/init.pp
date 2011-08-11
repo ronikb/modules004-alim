@@ -2,7 +2,7 @@
 
 #class app::gitclone_db {        
 #	exec { "gitclone-db":
-#		command => "git clone $application_drupal_gitclone_db $application_drupal_gitclone_db_destination",
+#		command => "git clone $app_drupal_gitclone_db $app_drupal_gitclone_db_destination",
 #		timeout => 3600, 
 #       logoutput=> on_failure, 
 #		before => Class ["app::dbcreate"]
@@ -10,7 +10,7 @@
 #}
 class app::gitclone_app {
 	exec { "gitclone-application":
-		command => "git clone $application_drupal_gitclone_application $application_drupal_gitclone_application_destination",
+		command => "git clone $app_drupal_gitclone_application $app_drupal_gitclone_application_destination",
 #		require => Class ["app::gitclone_db"]
 }
 }
@@ -22,13 +22,13 @@ class app::mysql_restart {
 }
 class app::dbcreate {
 	exec { "db-create":
-		command =>"/etc/puppet/modules/app/scripts/mysql-db-create.sh $application_mysql_dbname",
+		command =>"/etc/puppet/modules/app/scripts/mysql-db-create.sh $app_mysql_dbname",
 		require => Service ["mysql"]
 }
 }
 class app::dbrestore {
 	exec { "db-restore":
-		command =>"/etc/puppet/modules/app/scripts/mysql-db-restore.sh $application_mysql_dbname $application_mysql_dump_location_for_dbrestore",
+		command =>"/etc/puppet/modules/app/scripts/mysql-db-restore.sh $app_mysql_dbname $app_mysql_dump_location_for_dbrestore",
 		timeout => 3600,
 		logoutput=> on_failure,
 		require => Class ["app::dbcreate"]
@@ -36,13 +36,13 @@ class app::dbrestore {
 }
 class app::php_memory {
 	 exec { "increase-php-memory-limit":
-			command => "sed -i 's/memory_limit = .*/memory_limit = $application_php_memory_limit/' /etc/php5/apache2/php.ini",
+			command => "sed -i 's/memory_limit = .*/memory_limit = $app_php_memory_limit/' /etc/php5/apache2/php.ini",
        	require => Package["php5"]
 }
 }
 class app::symlink{
 	exec { "symlink-for-files-folder":
-		command => "ln -s $application_drupal_symlink_files_folder_source $application_drupal_symlink_files_folder_destination",
+		command => "ln -s $app_drupal_symlink_files_folder_source $app_drupal_symlink_files_folder_destination",
 		require => Class ["app::gitclone_app"]
 }
 }
@@ -54,7 +54,7 @@ class app::edit_for_cleanurl{
 }
 class app::edit_for_documentroot{
 	exec { "edit-documentRoot-folder-path":
-       command => "/etc/puppet/modules/app/scripts/edit-documentRoot-folder-path.sh $application_apache_default_documentroot $application_apache_current_documentroot",
+       command => "/etc/puppet/modules/app/scripts/edit-documentRoot-folder-path.sh $app_apache_default_documentroot $app_apache_current_documentroot",
       require => Package["apache2"]
 }
 }
