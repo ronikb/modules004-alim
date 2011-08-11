@@ -59,12 +59,12 @@ class app::edit_for_documentroot{
 }
 }
 class app::drupal_settings_file {
-	file { "/etc/app/settings.php":
+	file { "/var/www/www.alim.org/sites/default/settings.php":
 		ensure => present,
 		source => "puppet:///modules/app/settings.php",
 		owner => "root",
 		group => "root",
-		require => Class ["app::gitclone_app"]
+		require => Class ["app::gitclone_app"],		
 }
 }
 class app::write_permissions_to_files_folder {
