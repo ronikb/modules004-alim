@@ -1,9 +1,9 @@
 #!/bin/sh
 #This will create MySql database
 dbuser=root
-app_mysql_user="apliww"
-app_mysql_password="fiwwfa"
-app_mysql_dbname="fifaaww"
+app_mysql_user=$1
+app_mysql_password=$2
+app_mysql_dbname=$3
 #STEP 1 - CREATE DB
 #check if db exists first
 echo "Creating a database for $app_mysql_dbname"
