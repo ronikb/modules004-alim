@@ -21,14 +21,14 @@ class app::gitclone_app {
 class app::mysql_restart {
 	exec { "restart_mysql_service": 
          command  => "/etc/puppet/modules/app/scripts/mysql-service-restart.sh", 
-         before => Class ["app::dbcreate"]
+         require => File ["/etc/mysql/my.cnf"]
 } 
 }
 #This will create mysql database.
 class app::dbcreate {
 	exec { "db-create":
 		command =>"/etc/puppet/modules/app/scripts/mysql-db-create.sh $app_mysql_user $app_mysql_password $app_mysql_dbname",
-		require => Service ["mysql"]
+		require => Class ["app::mysql_restart"]
 }
 }
 #This will restore mysql database.
