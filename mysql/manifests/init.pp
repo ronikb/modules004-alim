@@ -24,16 +24,17 @@ class mysql::install {
 		hasrestart => true,
 		require => Package ["mysql-server"]
 }
- 
+}
+class mysql::config { 
 	file { "/etc/mysql/my.cnf":
 		ensure => present,
 		source => "puppet:///modules/mysql/my.cnf",
 		owner => "mysql",
 		group => "mysql",
-		require => Package ["mysql-server"]
+		require => Class ["mysql::install"]
 }
 }
 
 class mysql {
-	include mysql::install
+	include mysql::install class mysql::config
 }
