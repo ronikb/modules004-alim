@@ -18,6 +18,12 @@ $app_mysql_dump_location_for_dbrestore="/home/alim/blueserf_alim_20110807010001.
 #The database name
 $app_mysql_dbname="alim"
 
+#The database username
+$app_mysql_user="alimuser"
+
+#The database password
+$app_mysql_password="alim#@!"
+
 #The memeory limit of the PHP
 $app_php_memory_limit="384M"
 
