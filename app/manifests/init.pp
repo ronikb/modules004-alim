@@ -27,7 +27,7 @@ class app::mysql_restart {
 #This will create mysql database.
 class app::dbcreate {
 	exec { "db-create":
-		command =>"/etc/puppet/modules/app/scripts/mysql-db-create.sh $app_mysql_dbname $app_mysql_user $app_mysql_password",
+		command =>"/etc/puppet/modules/app/scripts/mysql-db-create.sh $app_mysql_user $app_mysql_password $app_mysql_dbname",
 		require => Service ["mysql"]
 }
 }
