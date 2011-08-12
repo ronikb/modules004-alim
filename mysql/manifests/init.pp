@@ -36,5 +36,5 @@ class mysql::config {
 }
 
 class mysql {
-	include mysql::install, class mysql::config
+	include mysql::install, mysql::config
 }
