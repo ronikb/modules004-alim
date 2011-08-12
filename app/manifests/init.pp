@@ -1,20 +1,10 @@
 # This will do application specific settings
 #TODO: make linux distro-independent (works only on Ubuntu/Debian now)
 
-#This will git clone database files from github.
-#class app::gitclone_db {        
-#	exec { "gitclone-db":
-#		command => "git clone $app_drupal_gitclone_db $app_drupal_gitclone_db_destination",
-#		timeout => 3600, 
-#       logoutput=> on_failure, 
-#		before => Class ["app::dbcreate"]
-#}
-#}
 #This will gitclone application files from github
 class app::gitclone_app {
 	exec { "gitclone-application":
 		command => "git clone $app_drupal_gitclone_application $app_drupal_gitclone_application_destination",
-#		require => Class ["app::gitclone_db"]
 }
 }
 #This class will do mysql service restart.

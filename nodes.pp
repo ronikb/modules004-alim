@@ -6,12 +6,6 @@ $app_drupal_gitclone_application="https://github.com/alim-foundation/www.alim.or
 #The destination folder in the server to where the application fiels to be cloned
 $app_drupal_gitclone_application_destination="/var/www/www.alim.org/"
 
-#Clone URL from where the database and files fodler of drupal to be cloned
-$app_drupal_gitclone_db="git@github.com:netspective/medigy-drupal-db.git"
-
-#The destination of the database and files folder
-$app_drupal_gitclone_db_destination="/medigy/medigy-drupal-db/"
-
 #The location from where the mysqldump to be restored
 $app_mysql_dump_location_for_dbrestore="/home/alim/blueserf_alim_20110807010001.sql"
 
